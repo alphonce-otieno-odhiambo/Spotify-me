@@ -10,24 +10,26 @@ async function refreshAccessToken(token){
         spotifyApi.setAccessToken(token.accessToken);
         spotifyApi.setRefreshToken(token.refreshToken);
 
-        const {body:refreshedToken } = await spotifyApi.refreshAccessToken();
+        const {body: refreshedToken } = await spotifyApi.refreshAccessToken();
         console.log("REFRESHED TOKEN IS", refreshedToken);
 
         return {
             ...token,
             accessToken:refreshedToken.access_token,
             accessTokenExpires: Date.now + refreshedToken.expires_in * 1000 ,// = 1hr as 3600 returns from spotify api
-            refreshedToken:refreshedToken.refresh_token ?? token.refreshToken,
-        }
+
+            refreshToken:refreshedToken.refresh_token ?? token.refreshToken,
+            //Replace if new one come back else fall back to old refresh token
+        };
 
         
     } catch (error) {
-        console.log(error)
+        console.error(error)
 
         return {
             ...token,
-            error:'refreshTokenError'
-        }
+            error:"RefreshAccessTokenError"
+        };
     }
 }
 
@@ -54,7 +56,7 @@ export default NextAuth({
             accessToken:account.access_token,
             refreshToken:account.refresh_token,
             username:account.providerAccountId,
-            accessTokenExpires:account.expires_at * 1000,
+            accessTokenExpires:account.expires_at * 1000, //we are handling expiries times in Milliseconds hence * 1000 
           }
       }
     // Return the prevouse token if access token has not expired
@@ -72,6 +74,6 @@ export default NextAuth({
         session.user.username = token.username;
 
         return session;
-    }
-  }
+    },
+  },
 });
