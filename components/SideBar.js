@@ -11,7 +11,7 @@ import {
 function SideBar() {
   return (
     <div className='text-gray-500 p-5 text-xs border-r border-gray-900'>
-        <div>
+        <div className='space-y-4'>
             <button className='flex items-center space-x-2 hover:bg-white'>
                 <HomeIcon className='h-6 w-5'/>
                 <p>Home</p>
@@ -39,6 +39,16 @@ function SideBar() {
                 <p>Your Episodes</p>
             </button>
             <hr className='border-t-[0.1px] border-gray-400'/>
+
+            {/* playlist */}
+            <p className='cursor-pointer hover:text-white'>Playlist name...</p>
+            <p className='cursor-pointer hover:text-white'>Playlist name...</p>
+            <p className='cursor-pointer hover:text-white'>Playlist name...</p>
+            <p className='cursor-pointer hover:text-white'>Playlist name...</p>
+            <p className='cursor-pointer hover:text-white'>Playlist name...</p>
+            <p className='cursor-pointer hover:text-white'>Playlist name...</p>
+            <p className='cursor-pointer hover:text-white'>Playlist name...</p>
+            <p className='cursor-pointer hover:text-white'>Playlist name...</p>
         </div>
     </div>
   )
