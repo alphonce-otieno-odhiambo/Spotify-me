@@ -1,9 +1,19 @@
-import React from 'react'
+import React from 'react';
+import {
+    HomeIcon,
+    SearchIcon,
+    LibraryIcon,
+    PlusCircleIcon,
+} from '@heroicons/react/outline';
 
 function SideBar() {
   return (
     <div>
-        <h1>Im a side bar</h1>
+        <div>
+            <button>
+                <HomeIcon className='h-6 w-5'/>
+            </button>
+        </div>
     </div>
   )
 }
